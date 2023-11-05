@@ -1,24 +1,21 @@
 ; Assembler 32bit template
-
+; This app will multiply two numbers
 bits 32
-section .data
-	byteVariable	db	192
-;variables with values go here
-section .bss
-;reserved memory goes here
 section .text
-;Your program code goes here
+global _start
+	_start:
+		xor		ebx, 	ebx
+		mov		ecx,	4
+		mov		eax,	2
 
-	global _start
-_start:
-    nop
-	
-	;Your program code should go here
+	myloop:
+		add		ebx,	eax
+		loop	myloop		
 
-	;Do not remove/change the lines below here.
-	;These exit out of the application and back
-	;to linux in an orderly fashion
-	nop
-	mov eax,1      ; Exit system call value
-	mov ebx,0      ; Exit return code
-	int 80h        ; Call the kernel
+
+
+
+
+	finish:
+		mov eax,1      ; Exit system call value
+		int 80h        ; Call the kernel
