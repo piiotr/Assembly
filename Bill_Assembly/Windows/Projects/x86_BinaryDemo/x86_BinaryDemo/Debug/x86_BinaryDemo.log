@@ -1,3 +1,5 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (x86_BinaryDemo.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   Assembling main.asm...
-  x86_BinaryDemo.vcxproj -> C:\Users\piotr\GitHub\Assembly\Bill_Assembly\Windows\Projects\x86_BinaryDemo\Debug\x86_Binary_Demo.exe
+main.asm(24): error A2006: undefined symbol : main2e
+main.asm(24): error A2148: invalid symbol type in expression : main2e
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\BuildCustomizations\masm.targets(70,5): error MSB3721: The command "ml.exe /c /nologo /Zi /Fo"Debug\main.obj" /W3 /errorReport:prompt  /Tamain.asm" exited with code 1.

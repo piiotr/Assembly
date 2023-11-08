@@ -1,0 +1,28 @@
+     1                                  
+     2                                  section .data
+     3                                  ;variables with values go here
+     4                                  
+     5                                  section .bss
+     6                                  ;reserved memory goes here
+     7                                  section .text
+     8                                  ;Your program code goes here
+     9                                  	global  _start 
+    10                                  	_start:
+    11                                  
+    12 00000000 90                      	nop	
+    13                                  	;Your program code should go here
+    14                                  	
+    15 00000001 48B8FFFFFFFFFFFFFF-     	mov	rax,	0fffffffffffffffh
+    15 0000000A 0F                 
+    16 0000000B B011                    	mov	al,	11h
+    17 0000000D B422                    	mov	ah,	22h
+    18 0000000F 66B83333                	mov	ax,	3333h
+    19 00000013 B844444444              	mov	eax,	44444444h	
+    20                                  
+    21 00000018 90                      	nop
+    22                                  	;Do not remove/change the lines below
+    23                                  	;These exit out of the application and back
+    24                                  	;to linux in an orderly fashion
+    25 00000019 B83C000000              	mov		rax, 60					;60 = system exit
+    26 0000001E BF00000000              	mov		rdi, 0					;0 = return code
+    27 00000023 0F05                    	syscall							;Poke the kernel

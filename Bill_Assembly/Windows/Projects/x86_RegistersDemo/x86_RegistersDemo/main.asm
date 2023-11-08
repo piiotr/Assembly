@@ -2,23 +2,21 @@
 .model flat, stdcall
 .stack 4096 
 ExitProcess PROTO, dwExitCode:DWORD  
-
 .data 
-	byteVariable	db	192
 
 .code 
 main PROC
-	xor		ebx,	ebx
-	mov		ecx,	4
-	mov		eax,	2
+	nop
 
-	myloop:
-		add		ebx,	eax
-		loop	myloop
-	
-	
+	mov		eax,	0ffffffffh
+	mov		al,		11h
+	mov		ah,		22h
 
-	
+	mov		eax,	0ffffffffh
+	mov		ax,		3333h
+
+
+	nop
 	INVOKE ExitProcess, 0
 main ENDP 
-END main2e
+END main

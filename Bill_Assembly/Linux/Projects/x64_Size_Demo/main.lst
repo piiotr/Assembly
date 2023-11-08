@@ -1,0 +1,32 @@
+     1                                  
+     2                                  section .data
+     3                                  ;variables with values go here
+     4 00000000 12                      		byteVariable		db		12h
+     5 00000001 2211                    		wordVariable		dw		1122h
+     6 00000003 44332211                		dwordVariable		dd		11223344h
+     7 00000007 8877665544332211        		quadWordVariable	dq		1122334455667788h
+     8                                  
+     9 0000000F 83                      		sByteVariable		db		-125
+    10 00000010 F9F5                    		sWordVariable		dw		-2567
+    11 00000012 5A80FFFF                		sDWordVariabl		dd		-32678
+    12 00000016 C3F39CFAFEFFFFFF        		sQuadWordVariable	dq		-4385344573
+    13                                  
+    14                                  	
+    15                                  section .bss
+    16                                  ;reserved memory goes here
+    17                                  section .text
+    18                                  ;Your program code goes here
+    19                                  	global  _start 
+    20                                  	_start:
+    21                                  
+    22 00000000 90                      	nop	
+    23                                  	;Your program code should go here
+    24                                  	
+    25                                  
+    26 00000001 90                      	nop
+    27                                  	;Do not remove/change the lines below
+    28                                  	;These exit out of the application and back
+    29                                  	;to linux in an orderly fashion
+    30 00000002 B83C000000              	mov		rax, 60					;60 = system exit
+    31 00000007 BF00000000              	mov		rdi, 0					;0 = return code
+    32 0000000C 0F05                    	syscall							;Poke the kernel

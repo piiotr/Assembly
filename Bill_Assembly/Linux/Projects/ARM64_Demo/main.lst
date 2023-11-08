@@ -1,0 +1,46 @@
+AARCH64 GAS  main.asm 			page 1
+
+
+   1              	/* ARM 64-bit assembly template */
+   2              	
+   3              	.section .data
+   4              		/* Place your initialized variables here */
+   5 0000 48656C6C 		msg:	.ascii "Hello, ARM64!\n"
+   5      6F2C2041 
+   5      524D3634 
+   5      210A
+   6              			msglen = . - msg
+   7              	
+   8              	.section .bss
+   9              		/* Place your uninitialized variables here */
+  10              		
+  11              	.section .text
+  12              	.global _start
+  13              	
+  14              	_start:
+  15              	/* syscall write(int fd, const void *buf, size_t count) */
+  16 0000 200080D2 	    mov x0, #1     		//Move 1, stdout, to the 64-bit x0 register
+  17 0004 E1000058 	    ldr x1, =msg 		//Place the address of the msg variable into x1
+  18 0008 02010058 	    ldr x2, =msglen 	//Place the address of the length of msg into x2
+  19 000c 08088052 	    mov w8, #64 		//Place 64 into w8 - write
+  20 0010 010000D4 	    svc #0				//Poke the kernel
+  21              	
+  22              	/* syscall exit(int status) */
+  23 0014 000080D2 	    mov x0, #0 			//Move the return value of 0 into x0
+  24 0018 A80B8052 	    mov w8, #93 		//Move 93, end program, into w8
+  25 001c 010000D4 	    svc #0				//Poke the kernel
+  26 0020 00000000 	
+  26      00000000 
+  26      0E000000 
+  26      00000000 
+AARCH64 GAS  main.asm 			page 2
+
+
+DEFINED SYMBOLS
+            main.asm:5      .data:0000000000000000 msg
+            main.asm:6      *ABS*:000000000000000e msglen
+            main.asm:14     .text:0000000000000000 _start
+            main.asm:16     .text:0000000000000000 $x
+            main.asm:26     .text:0000000000000020 $d
+
+NO UNDEFINED SYMBOLS

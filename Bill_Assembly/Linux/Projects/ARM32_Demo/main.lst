@@ -1,0 +1,47 @@
+ARM GAS  main.asm 			page 1
+
+
+   1              	/* Assembler ARM 32bit template */
+   2              	.section .data
+   3              		/* Place your variable with values here */
+   4 0000 48656C6C 		msg:	.ascii "Hello, ARM32!\n"
+   4      6F2C2041 
+   4      524D3332 
+   4      210A
+   5              			msglen = . - msg
+   6              	
+   7              	.section .text
+   8              	.global _start
+   9              	
+  10              	_start:
+  11              	/* syscall write(int fd, const void *buf, size_t count) */
+  12              	
+  13 0000 0100A0E3 	    mov r0, #1 			@Place 1 into the r0 32-bit register, stdout
+  14 0004 24109FE5 	    ldr r1, =msg 		@Place the address of the msg variable into r1
+  15 0008 0E20A0E3 	    ldr r2, =msglen 		@Place the address of the string length into r2
+  16 000c 0470A0E3 	    mov r7, #4 			@Place a 4, write, into r7
+  17 0010 000000EF 	    svc #0			@Poke the kernel
+  18              	    
+  19 0014 18009FE5 	    ldr 	R0,	=0x12345678	
+  20 0018 AB00A0E3 	    ldr 	R0,	=0xab
+  21 001c 0010A0E3 	    ldr 	R1,	=0
+  22 0020 B011DFE1 	    ldrh 	R1,	=0xabcd
+  23              	
+  24              	/* syscall exit(int status) */
+  25 0024 0000A0E3 	    mov r0, #0 		@Place 0 into the r0 register, Return code
+  26 0028 0170A0E3 	    mov r7, #1 		@Place 1 into r7, Exit the program
+  27 002c 000000EF 	    svc #0			@Poke the kernel
+  28 0030 00000000 	
+  28      78563412 
+  28      CDAB0000 
+ARM GAS  main.asm 			page 2
+
+
+DEFINED SYMBOLS
+            main.asm:4      .data:0000000000000000 msg
+            main.asm:5      *ABS*:000000000000000e msglen
+            main.asm:10     .text:0000000000000000 _start
+            main.asm:13     .text:0000000000000000 $a
+            main.asm:28     .text:0000000000000030 $d
+
+NO UNDEFINED SYMBOLS
