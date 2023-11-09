@@ -1,0 +1,43 @@
+     1                                  section .data
+     2                                  section .bss
+     3                                  section .text
+     4                                  	;  0 + 1 + 1 + 2 + 3 + 5 + 8 + 13 + 21 + 34
+     5                                  	;  for 5 the result should be 7 
+     6                                  
+     7                                  	global  _start 
+     8                                  	_start:
+     9                                  		; rcx will hold the quantity of numbers 
+    10 00000000 B905000000              		mov		rcx,	5
+    11                                  		; rdi will hold the final result 
+    12 00000005 4831FF                  		xor		rdi, 	rdi 
+    13                                  		; r8 will hold the first number 
+    14 00000008 4D31C0                  		xor		r8, 	r8
+    15                                  		; r9 will hold the second number 
+    16 0000000B 41B901000000            		mov		r9,		1
+    17                                  		; r10 will hold the pair sum 
+    18 00000011 4D31D2                  		xor		r10,	r10
+    19                                  
+    20                                  	theloop:
+    21 00000014 4C01C7                  		add		rdi,	r8
+    22 00000017 4D01C2                  		add		r10,	r8
+    23 0000001A 48FFC9                  		dec		rcx
+    24                                  		
+    25 0000001D 4883F900                		cmp		rcx,	0
+    26 00000021 741A                    		je		finish
+    27                                  
+    28 00000023 4C01CF                  		add		rdi,	r9
+    29 00000026 4D01CA                  		add		r10,	r9
+    30 00000029 48FFC9                  		dec		rcx
+    31 0000002C 4883F900                		cmp		rcx,	0
+    32 00000030 740B                    		je		finish
+    33                                  
+    34                                  
+    35 00000032 4D89D0                  		mov		r8,		r10
+    36 00000035 4D01D1                  		add		r9,		r10
+    37 00000038 4D31D2                  		xor		r10,	r10
+    38                                  
+    39 0000003B EBD7                    		jmp		theloop		
+    40                                  
+    41                                  	finish:
+    42 0000003D B83C000000              		mov		rax, 60					;60 = system exit
+    43 00000042 0F05                    		syscall							;Poke the kernel

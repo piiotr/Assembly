@@ -1,0 +1,94 @@
+AARCH64 GAS  main.asm 			page 1
+
+
+   1              	.section .data
+   2 0000 48656C6C 		msg:	.ascii "Hello, ARM64!\n"
+   2      6F2C2041 
+   2      524D3634 
+   2      210A
+   3              			msglen = . - msg
+   4              	
+   5              	    /* Integers */
+   6              	
+   7 000e 12       	    aByte:  .byte   18
+   8 000f FF       	    aByte2: .byte   0xff
+   9              	
+  10              	    /* byte = 1 byte, half-word = 2 bytes, word = 4 bytes, double-word = 8 */   
+  11              	
+  12 0010 FFFF     	    aHWord:  .hWord 0xffff
+  13 0012 1600     	    aHWord2: .hWord 22
+  14              	
+  15 0014 FFFFFFFF 	    aWord:  .word   0xffffffff
+  16              	
+  17 0018 22000000 	    aDWord:  .dword  34
+  17      00000000 
+  18 0020 5678FF00 	    aDWord2:  .dword  0xff7856      
+  18      00000000 
+  19              	
+  20              	    /* Floating Point */
+  21              	
+  22 0028 B757     	    float16b:   .float16    123.45
+  23 002a 66E6F642 	    float32b:   .float      123.45
+  24 002e 66666666 	    float64b:   .double     132.45
+  24      668E6040 
+  25              	
+  26              	    /* Strings */
+  27 0036 48656C6C 	    someString: .ascii  "Hello Peter!" /* not a null terminated string */
+  27      6F205065 
+  27      74657221 
+  28 0042 48656C6C 	    someStrig2: .asciz  "Hello There" /* null-terminated string  */
+  28      6F205468 
+  28      65726500 
+  29              	
+  30              	    /* Arrays */
+  31 004e 00000000 	    array1:     .skip   50 /* Array of 50 bytes */
+  31      00000000 
+  31      00000000 
+  31      00000000 
+  31      00000000 
+  32 0080 0A000000 	    array2:     .word   10,20,30,40,50
+  32      14000000 
+  32      1E000000 
+  32      28000000 
+  32      32000000 
+  33              	
+  34              	    
+  35              	
+  36              	.section .bss
+  37              		
+  38              	.section .text
+  39              	.global _start
+AARCH64 GAS  main.asm 			page 2
+
+
+  40              	    _start:
+  41              	    
+  42 0000 000080D2 	        mov x0, #0 			//Move the return value of 0 into x0
+  43 0004 A80B8052 	        mov w8, #93 		//Move 93, end program, into w8
+  44 0008 010000D4 	        svc #0				//Poke the kernel
+  45              	
+AARCH64 GAS  main.asm 			page 3
+
+
+DEFINED SYMBOLS
+            main.asm:2      .data:0000000000000000 msg
+            main.asm:3      *ABS*:000000000000000e msglen
+            main.asm:7      .data:000000000000000e aByte
+            main.asm:8      .data:000000000000000f aByte2
+            main.asm:12     .data:0000000000000010 aHWord
+            main.asm:13     .data:0000000000000012 aHWord2
+            main.asm:15     .data:0000000000000014 aWord
+            main.asm:17     .data:0000000000000018 aDWord
+            main.asm:18     .data:0000000000000020 aDWord2
+            main.asm:22     .data:0000000000000028 float16b
+            main.asm:23     .data:000000000000002a float32b
+            main.asm:24     .data:000000000000002e float64b
+            main.asm:27     .data:0000000000000036 someString
+            main.asm:28     .data:0000000000000042 someStrig2
+            main.asm:31     .data:000000000000004e array1
+            main.asm:31     .data:000000000000004e $d
+            main.asm:32     .data:0000000000000080 array2
+            main.asm:40     .text:0000000000000000 _start
+            main.asm:42     .text:0000000000000000 $x
+
+NO UNDEFINED SYMBOLS

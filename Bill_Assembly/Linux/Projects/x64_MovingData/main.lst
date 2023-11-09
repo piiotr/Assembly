@@ -1,0 +1,13 @@
+     1                                  section .data
+     2 00000000 1700                    	myword		dw		23
+     3                                  section .bss
+     4                                  section .text
+     5                                  	global  _start 
+     6                                  	_start:
+     7 00000000 488B3C25[00000000]      		mov		rdi,	[myword]	
+     8                                  	
+     9                                  
+    10                                  
+    11                                  
+    12 00000008 B83C000000              		mov		rax, 60					;60 = system exit
+    13 0000000D 0F05                    		syscall							;Poke the kernel

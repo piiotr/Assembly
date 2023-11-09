@@ -1,0 +1,21 @@
+AARCH64 GAS  main.asm 			page 1
+
+
+   1              	.section .data
+   2              	.section .bss
+   3              	.section .text
+   4              	.global _start
+   5              	    _start:
+   6              	
+   7 0000 400080D2 	    mov x0, #2 			//Move the return value of 0 into x0
+   8 0004 A80B8052 	    mov w8, #93 		//Move 93, end program, into w8
+   9 0008 010000D4 	    svc #0				//Poke the kernel
+  10              	
+AARCH64 GAS  main.asm 			page 2
+
+
+DEFINED SYMBOLS
+            main.asm:5      .text:0000000000000000 _start
+            main.asm:7      .text:0000000000000000 $x
+
+NO UNDEFINED SYMBOLS

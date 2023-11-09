@@ -1,0 +1,43 @@
+     1                                  bits 32
+     2                                  section .data
+     3                                  section .bss
+     4                                  section .text
+     5                                  global _start
+     6                                  	;  0 + 1 + 1 + 2 + 3 + 5 + 8 + 13 + 21 + 34
+     7                                  	;  for 5 the result should be 7 
+     8                                  
+     9                                  	_start:
+    10                                  		; ebx will hold the final result 
+    11 00000000 31DB                    		xor		ebx,	ebx
+    12                                  		; ecx will hold the number of numbers 
+    13 00000002 B905000000              		mov		ecx,	5
+    14                                  		; eax will hold the first number 
+    15 00000007 31C0                    		xor		eax,	eax
+    16                                  		; edx will hold the second number 
+    17 00000009 BA01000000              		mov		edx,	1
+    18                                  		; esi will hold the pair 
+    19 0000000E 31F6                    		xor		esi,	esi
+    20                                  
+    21                                  	theloop:
+    22 00000010 01C3                    		add		ebx,	eax
+    23 00000012 01C6                    		add		esi,	eax
+    24 00000014 49                      		dec		ecx
+    25                                  
+    26 00000015 83F900                  		cmp		ecx,	0
+    27 00000018 7412                    		je		finish
+    28                                  
+    29 0000001A 01D3                    		add		ebx,	edx
+    30 0000001C 01D6                    		add		esi,	edx
+    31 0000001E 49                      		dec		ecx
+    32                                  
+    33 0000001F 83F900                  		cmp		ecx,	0
+    34 00000022 7408                    		je 		finish
+    35                                  
+    36 00000024 89F0                    		mov		eax,	esi 
+    37 00000026 01F2                    		add		edx,	esi
+    38 00000028 31F6                    		xor		esi,	esi	
+    39 0000002A EBE4                    		jmp		theloop	
+    40                                  	
+    41                                  	finish:
+    42 0000002C B801000000              		mov eax,1      ; Exit system call value
+    43 00000031 CD80                    		int 80h        ; Call the kernel

@@ -1,0 +1,46 @@
+AARCH64 GAS  main.asm 			page 1
+
+
+   1              	.section .data
+   2 0000 63000000 	    mydword:        .dword      99
+   2      00000000 
+   3              	.section .bss	
+   4              	.section .text
+   5              	.global _start
+   6              	    _start:
+   7              	        // use x0 for output 
+   8 0000 83010058 	        ldr     x3,     =mydword
+   9 0004 640040F9 	        ldr     x4,     [x3]
+  10 0008 E00304AA 	        mov     x0,     x4
+  11              	
+  12 000c 23010058 	        ldr     x3,     =mydword
+  13 0010 800C80D2 	        mov     x0,     100
+  14 0014 600000F9 	        str     x0,     [x3]
+  15              	
+  16              	
+  17 0018 C3000058 	        ldr     x3,     =mydword
+  18 001c 640040F9 	        ldr     x4,     [x3]
+  19 0020 E00304AA 	        mov     x0,     x4 
+  20              	
+  21              	
+  22              	
+  23              	
+  24              	
+  25              	
+  26              	
+  27              	
+  28 0024 A80B8052 	        mov w8, #93 		//Move 93, end program, into w8
+  29 0028 010000D4 	        svc #0				//Poke the kernel
+  30 002c 00000000 	
+  30      00000000 
+  30      00000000 
+AARCH64 GAS  main.asm 			page 2
+
+
+DEFINED SYMBOLS
+            main.asm:2      .data:0000000000000000 mydword
+            main.asm:6      .text:0000000000000000 _start
+            main.asm:8      .text:0000000000000000 $x
+            main.asm:30     .text:0000000000000030 $d
+
+NO UNDEFINED SYMBOLS
