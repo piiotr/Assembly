@@ -30,7 +30,7 @@
 
         //Move a signed byte into x0
         ldr     x3,     =byteVar
-        ldr   w0,     [x3]
+        ldrsb   w0,     [x3]
 
         ldr     x3,     =hWordVar
         ldrh    w0,     [x3]        
