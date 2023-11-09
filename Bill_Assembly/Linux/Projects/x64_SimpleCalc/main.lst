@@ -1,0 +1,15 @@
+     1                                  section .data
+     2 00000000 0002000000000000        	integer1	dq	200h
+     3 00000008 5500000000000000        	integer2	dq	55h
+     4                                  section .bss
+     5                                  section .text
+     6                                  	global  _start 
+     7                                  	_start:
+     8                                  
+     9 00000000 B864000000              		mov		rax,	100
+    10 00000005 4805C8000000            		add		rax,	200
+    11                                  	
+    12                                  		
+    13 0000000B 4889C7                  		mov		rdi, rax					;0 = return code
+    14 0000000E B83C000000              		mov		rax, 60					;60 = system exit
+    15 00000013 0F05                    		syscall							;Poke the kernel
