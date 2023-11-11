@@ -2,24 +2,47 @@ ARM GAS  main.asm 			page 1
 
 
    1              	.section .data
-   2              	.section .bss
-   3              	.section .text
-   4              	.global _start
-   5              	    _start:
-   6 0000 6400A0E3 	        mov r0, #100
-   7 0004 C810A0E3 	        mov r1, #200
-   8 0008 020080E0 	        add r0, r0, r2
-   9              	
-  10              	
-  11 000c 0000A0E3 	        mov r0, #0 		@Place 0 into the r0 register, Return code
-  12 0010 0170A0E3 	        mov r7, #1 		@Place 1 into r7, Exit the program
-  13 0014 000000EF 	        svc #0			@Poke the kernel
+   2              	    dWordVar1:   .dword      0x100
+   3              	    dWordVar2:   .dword      0x200
+   4              	.section .bss
+   5              	.section .text
+   6              	.global _start
+   7              	    _start:
+   8 ???? 6400A0E3 	        mov r0, #100
+   9 ???? C810A0E3 	        mov r1, #200
+  10 ???? 010080E0 	        add r0, r0, r1
+  11              	
+  12 ???? 6400A0E3 	        mov r0, #100
+  13 ???? C80080E2 	        add r0, r0, #200
   14              	
+  15 ???? 4B0F40E2 	        sub r0, r0, #300
+  16 ???? 010040E0 	        sub r0, r0, r1
+  17              	
+  18 ???? 20309FE5 	        ldr r3, =dWordVar1
+  19 ???? 000093E5 	        ldr r0, [r3]
+  20              	
+  21 ???? 1C309FE5 	        ldr r3, =dWordVar2
+  22 ???? 001093E5 	        ldr r1, [r3]
+  23              	
+  24 ???? 010080E0 	        add r0, r0, r1        
+  25              	
+  26 ???? 0000E0E3 	        mov r0, #0xffffffff
+  27 ???? 010080E2 	        add r0, r0, #1
+  28              	
+  29              	
+  30 ???? 0000A0E3 	        mov r0, #0 		@Place 0 into the r0 register, Return code
+  31 ???? 0170A0E3 	        mov r7, #1 		@Place 1 into r7, Exit the program
+  32 ???? 000000EF 	        svc #0			@Poke the kernel
+  33 ???? 00000000 	
+  33      00000000 
 ARM GAS  main.asm 			page 2
 
 
 DEFINED SYMBOLS
-            main.asm:5      .text:0000000000000000 _start
-            main.asm:6      .text:0000000000000000 $a
+            main.asm:2      .data:0000000000000000 dWordVar1
+            main.asm:3      .data:0000000000000000 dWordVar2
+            main.asm:7      .text:0000000000000000 _start
+            main.asm:8      .text:0000000000000000 $a
+            main.asm:33     .text:0000000000000044 $d
 
 NO UNDEFINED SYMBOLS
