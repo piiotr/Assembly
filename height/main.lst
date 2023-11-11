@@ -1,0 +1,48 @@
+     1                                  
+     2                                  AGE     equ     0
+     3                                  WEIGHT  equ     8
+     4                                  HEIGHT  equ     16
+     5                                  PERSON_SIZE     equ     24 ; the size of bytes in terms of one person
+     6                                  
+     7                                  section .data
+     8                                                          ;   age, weight, height  
+     9 00000000 110000000000000046-         people          dq      17, 70, 170 ; first person  
+     9 00000009 00000000000000AA00-
+     9 00000012 000000000000       
+    10 00000018 2F000000000000003B-                         dq      47, 59, 189 ; second person
+    10 00000021 00000000000000BD00-
+    10 0000002A 000000000000       
+    11 00000030 240000000000000040-                         dq      36, 64, 210 ; third person
+    11 00000039 00000000000000D200-
+    11 00000042 000000000000       
+    12                                          .TYPE       equ     8
+    13                                          .SIZEOF     equ $-people
+    14                                          .LENGTHOF   equ people.SIZEOF / people.TYPE
+    15                                          .QUANTITY   equ (people.SIZEOF / PERSON_SIZE)
+    16                                  
+    17                                  section .bss 
+    18                                  section .text
+    19                                  global _start  
+    20                                      _start:
+    21                                          ; let's find the person who has smallest weight 
+    22 00000000 48BE-                           mov     rsi,    people
+    22 00000002 [0000000000000000] 
+    23 0000000A 488B7E08                        mov     rdi,    WEIGHT[rsi]
+    24 0000000E B903000000                      mov     rcx,    people.QUANTITY
+    25                                  
+    26                                      theloop:
+    27 00000013 4883F900                        cmp     rcx,    0
+    28 00000017 7414                            je      finish
+    29                                  
+    30 00000019 488B4608                        mov     rax,    WEIGHT[rsi]
+    31 0000001D 4839C7                          cmp     rdi,    rax
+    32 00000020 480F47F8                        cmova   rdi,    rax
+    33 00000024 48FFC9                          dec     rcx
+    34 00000027 4883C618                        add     rsi,    PERSON_SIZE
+    35 0000002B EBE6                            jmp     theloop
+    36                                  
+    37                                  
+    38                                  
+    39                                      finish:
+    40 0000002D B83C000000                      mov     rax,    60
+    41 00000032 0F05                            syscall
