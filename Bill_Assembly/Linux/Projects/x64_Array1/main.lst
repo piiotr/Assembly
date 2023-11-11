@@ -1,0 +1,63 @@
+     1                                  section .data
+     2 00000000 1122334455              	byteArray	db	11h, 22h, 33h, 44h, 55h
+     3                                  		.TYPE	equ		1
+     4                                  		.SIZEOF equ 	$-byteArray
+     5                                  		.LENGTHOF equ	byteArray.SIZEOF / byteArray.TYPE	 
+     6                                  
+     7 00000005 6666777788889999        	wordArray	dw	6666h, 7777h, 8888h, 9999h
+     8                                  		.TYPE 	equ 	2
+     9                                  		.SIZEOF	equ 	$-wordArray
+    10                                  		.LENGTHOF equ	wordArray.SIZEOF / wordArray.TYPE	 
+    11                                  	
+    12 0000000D BBBBBBBBCCCCCCCCDD-     	dwordArray	dd	0bbbbbbbbh, 0cccccccch, 0ddddddddh
+    12 00000016 DDDDDD             
+    13                                  		.TYPE	equ		4
+    14                                  		.SIZEOF	equ		$-dwordArray
+    15                                  		.LENGTHOF equ	dwordArray.SIZEOF / dwordArray.TYPE	 
+    16                                  	
+    17 00000019 EEEEEEEEEEEEEEEEFF-     	qwordArray	dq	0eeeeeeeeeeeeeeeeh, 0ffffffffffffffffh, 0h, 1111h
+    17 00000022 FFFFFFFFFFFFFF0000-
+    17 0000002B 000000000000111100-
+    17 00000034 0000000000         
+    18                                  		.TYPE	equ		8
+    19                                  		.SIZEOF	equ		$-qwordArray
+    20                                  		.LENGTHOF equ	qwordArray.SIZEOF / qwordArray.TYPE	 
+    21                                  
+    22                                  section .bss
+    23                                  section .text
+    24                                  global  _start 
+    25                                  	_start:
+    26 00000000 B800000000              		mov		rax,	0h							
+    27 00000005 BE00000000              		mov		rsi,	0h							
+    28                                  		
+    29 0000000A 48BE-                   		mov		rsi,	byteArray			
+    29 0000000C [0000000000000000] 
+    30 00000014 480FB606                		movzx	rax,	BYTE [rsi]				
+    31 00000018 4883C601                		add		rsi,	byteArray.TYPE			 
+    32 0000001C 480FB606                		movzx	rax,	BYTE [rsi]				
+    33                                  
+    34 00000020 48BE-                   		mov		rsi,	wordArray
+    34 00000022 [0500000000000000] 
+    35 0000002A 480FB706                		movzx	rax,	WORD [rsi]
+    36 0000002E 4883C602                		add		rsi,	wordArray.TYPE
+    37 00000032 480FB706                		movzx	rax,	WORD [rsi]
+    38                                  
+    39 00000036 48BE-                   		mov		rsi,	qwordArray
+    39 00000038 [1900000000000000] 
+    40 00000040 488B06                  		mov		rax,	[rsi]						
+    41 00000043 4883C608                		add		rsi,	qwordArray.TYPE
+    42 00000047 488B06                  		mov		rax,	[rsi]
+    43                                  
+    44 0000004A B820000000              		mov		rax,	qwordArray.SIZEOF
+    45 0000004F 48BE-                   		mov		rsi,	qwordArray
+    45 00000051 [1900000000000000] 
+    46 00000059 488B06                  		mov		rax,	[rsi]
+    47 0000005C 4883C608                		add		rsi,	qwordArray.TYPE
+    48 00000060 B804000000              		mov		rax,	qwordArray.LENGTHOF
+    49 00000065 488B06                  		mov		rax,	[rsi]
+    50                                  
+    51                                  
+    52                                  
+    53 00000068 4889C7                  		mov		rdi,	rax
+    54 0000006B B83C000000              		mov		rax, 	60					
+    55 00000070 0F05                    		syscall							
