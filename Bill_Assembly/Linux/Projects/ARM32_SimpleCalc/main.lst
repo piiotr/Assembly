@@ -1,0 +1,25 @@
+ARM GAS  main.asm 			page 1
+
+
+   1              	.section .data
+   2              	.section .bss
+   3              	.section .text
+   4              	.global _start
+   5              	    _start:
+   6 0000 6400A0E3 	        mov r0, #100
+   7 0004 C810A0E3 	        mov r1, #200
+   8 0008 020080E0 	        add r0, r0, r2
+   9              	
+  10              	
+  11 000c 0000A0E3 	        mov r0, #0 		@Place 0 into the r0 register, Return code
+  12 0010 0170A0E3 	        mov r7, #1 		@Place 1 into r7, Exit the program
+  13 0014 000000EF 	        svc #0			@Poke the kernel
+  14              	
+ARM GAS  main.asm 			page 2
+
+
+DEFINED SYMBOLS
+            main.asm:5      .text:0000000000000000 _start
+            main.asm:6      .text:0000000000000000 $a
+
+NO UNDEFINED SYMBOLS

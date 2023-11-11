@@ -11,7 +11,7 @@ ARM GAS  main.asm 			page 1
    8              	        @ r0 will hold the final result 
    9 0000 0000A0E3 	        mov     r0,     #0 
   10              	        @ r11 will hold the number of numbers 
-  11 0004 06B0A0E3 	        mov     r11,    #6
+  11 0004 05B0A0E3 	        mov     r11,    #5
   12              	        @ r1 will hold the first number
   13 0008 0010A0E3 	        mov     r1,     #0
   14              	        @ r2 will hold the second number
@@ -24,7 +24,7 @@ ARM GAS  main.asm 			page 1
   21 0018 013083E0 	        add     r3,     r1
   22 001c 01B04BE2 	        sub     r11,    #1
   23 0020 00005BE3 	        cmp     r11,    #0
-  24 0024 0800000A 	        beq      finish
+  24 0024 0800000A 	        beq     finish
   25              	
   26 0028 020080E0 	        add     r0,     r2
   27 002c 023083E0 	        add     r3,     r2
@@ -35,7 +35,7 @@ ARM GAS  main.asm 			page 1
   32 003c 0310A0E1 	        mov     r1,     r3
   33 0040 032082E0 	        add     r2,     r3
   34 0044 0030A0E3 	        mov     r3,     #0
-  35 0048 F1FFFFEA 	        b     theloop           
+  35 0048 F1FFFFEA 	        b       theloop           
   36              	
   37              	
   38              	

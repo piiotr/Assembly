@@ -8,7 +8,7 @@
         @ r0 will hold the final result 
         mov     r0,     #0 
         @ r11 will hold the number of numbers 
-        mov     r11,    #6
+        mov     r11,    #5
         @ r1 will hold the first number
         mov     r1,     #0
         @ r2 will hold the second number
@@ -21,7 +21,7 @@
         add     r3,     r1
         sub     r11,    #1
         cmp     r11,    #0
-        beq      finish
+        beq     finish
 
         add     r0,     r2
         add     r3,     r2
@@ -32,7 +32,7 @@
         mov     r1,     r3
         add     r2,     r3
         mov     r3,     #0
-        b     theloop           
+        b       theloop           
 
 
 
