@@ -1,0 +1,17 @@
+     1                                  
+     2                                  MY_CONSTANT1		equ		22h 
+     3                                  MY_ASCII_CONSTANT1	equ		'A'
+     4                                  
+     5                                  section .data
+     6                                  section .bss
+     7                                  section .text
+     8                                  global  _start 
+     9                                  	_start:
+    10                                  
+    11 00000000 B822000000              		mov		rax,	MY_CONSTANT1
+    12 00000005 B822000000              		mov		eax,	MY_CONSTANT1
+    13 0000000A B022                    		mov		al,		MY_CONSTANT1
+    14                                  	
+    15 0000000C B83C000000              		mov		rax, 60					;60 = system exit
+    16 00000011 BF00000000              		mov		rdi, 0					;0 = return code
+    17 00000016 0F05                    		syscall							;Poke the kernel

@@ -1,0 +1,67 @@
+     1                                  section .data
+     2                                  	; A 5 value byte array 
+     3 00000000 1122334455              	byteArray		db		11h, 22h, 33h, 44h, 55h
+     4                                  		.TYPE		equ		1	
+     5                                  		.SIZEOF		equ		$-byteArray
+     6                                  		.LENGTHOF	equ		byteArray.SIZEOF/byteArray.TYPE
+     7                                  	; 4 value word array 
+     8 00000005 6666777788889999        	wordArray		dw		6666h, 7777h, 8888h, 9999h
+     9                                  		.TYPE		equ		2
+    10                                  		.SIZEOF		equ		$-wordArray
+    11                                  		.LENGTHOF	equ		wordArray.SIZEOF/wordArray.TYPE
+    12                                  	; 3 value double word array 
+    13 0000000D BBBBBBBBCCCCCCCCDD-     	doublewordArray	dd		0bbbbbbbbh, 0cccccccch, 0ddddddddh
+    13 00000016 DDDDDD             
+    14                                  		.TYPE		equ		4
+    15                                  		.SIZEOF		equ		$-doublewordArray
+    16                                  		.LENGTHOF	equ		doublewordArray.SIZEOF/doublewordArray.TYPE
+    17                                  	; 4 value word array 
+    18                                  	; 7 value quad word array 
+    19 00000019 EEEEEEEEEEEEEEEEFF-     	qwordArray		dq		0eeeeeeeeeeeeeeeeh, 0ffffffffffffffffh, 0h, 1111111111111111h
+    19 00000022 FFFFFFFFFFFFFF0000-
+    19 0000002B 000000000000111111-
+    19 00000034 1111111111         
+    20 00000039 222222222222222233-     					dq		2222222222222222h, 3333333333333333h, 44444444444444444
+    20 00000042 333333333333331CC7-
+    20 0000004B 599BFCE59D00       
+    21                                  		.TYPE		equ		8
+    22                                  		.SIZEOF		equ		$-qwordArray
+    23                                  		.LENGTHOF	equ		qwordArray.SIZEOF/qwordArray.TYPE
+    24                                  	; 4 value word array 
+    25                                  
+    26                                  section .bss
+    27                                  section .text
+    28                                  	global  _start 
+    29                                  	_start:
+    30 00000000 B800000000              	mov			rax,	0h
+    31 00000005 BE00000000              	mov			rsi,	0h
+    32                                  
+    33 0000000A 480FB60425-             	movzx		rax, BYTE [byteArray]				;copy the first byte in our array into rax
+    33 0000000F [00000000]         
+    34 00000013 48BE-                   	mov			rsi, byteArray		;offset puts the address of byteArray into rsi
+    34 00000015 [0000000000000000] 
+    35 0000001D 480FB606                	movzx		rax, BYTE [rsi]			; ptr puts a value pointerd to intro rax
+    36 00000021 4883C601                	add			rsi, byteArray.TYPE			; take us to the next byteArray value
+    37 00000025 480FB606                	movzx		rax, BYTE [rsi]			; ptr puts a value pointerd to intro rax
+    38                                  
+    39 00000029 48BE-                   	mov			rsi, wordArray
+    39 0000002B [0500000000000000] 
+    40 00000033 480FB706                	movzx		rax, WORD [rsi]
+    41 00000037 4883C602                	add			rsi, wordArray.TYPE
+    42 0000003B 480FB706                	movzx		rax, WORD [rsi]
+    43                                  
+    44 0000003F 48BE-                   	mov			rsi, qwordArray
+    44 00000041 [1900000000000000] 
+    45 00000049 480FB706                	movzx		rax, WORD [rsi]
+    46 0000004D 4883C608                	add			rsi, qwordArray.TYPE
+    47 00000051 480FB706                	movzx		rax, WORD [rsi] 
+    48                                  
+    49 00000055 B808000000              	mov			rax, wordArray.SIZEOF
+    50                                  
+    51 0000005A B804000000              	mov			rax, wordArray.LENGTHOF
+    52                                  
+    53 0000005F B83C000000              	mov		rax, 60					;60 = system exit
+    54 00000064 BF00000000              	mov		rdi, 0					;0 = return code
+    55 00000069 0F05                    	syscall							;Poke the kernel
+    56                                  
+    57                                  	
