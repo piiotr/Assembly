@@ -56,8 +56,6 @@
     48 00000060 B804000000              		mov		rax,	qwordArray.LENGTHOF
     49 00000065 488B06                  		mov		rax,	[rsi]
     50                                  
-    51                                  
-    52                                  
-    53 00000068 4889C7                  		mov		rdi,	rax
-    54 0000006B B83C000000              		mov		rax, 	60					
-    55 00000070 0F05                    		syscall							
+    51 00000068 4889C7                  		mov		rdi,	rax
+    52 0000006B B83C000000              		mov		rax, 	60					
+    53 00000070 0F05                    		syscall							

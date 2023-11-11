@@ -1,0 +1,75 @@
+AARCH64 GAS  main.asm 			page 1
+
+
+   1              	.section .data
+   2 0000 11223344 	    byteArray:  .byte   0x11, 0x22, 0x33, 0x44, 0x55
+   2      55
+   3              	        byteArray.TYPE      = 1
+   4              	        byteArray.SIZEOF    = (. - byteArray)
+   5              	        byteArray.LENGTHOF  = (byteArray.SIZEOF / byteArray.TYPE)
+   6              	    
+   7 0005 11111111 	    wordArray: .word  0x11111111, 0x44444444, 0x33433333
+   7      44444444 
+   7      33334333 
+   8              	        wordArray.TYPE      = 2
+   9              	        wordArray.SIZEOF    = (. - wordArray)
+  10              	        wordArray.LENGTHOF  = (wordArray.SIZEOF / wordArray.TYPE)
+  11              	   
+  12 0011 66666666 	    dwordArray: .dword  0x6666666666666666, 0x7777777777777777, 0x888888888888888
+  12      66666666 
+  12      77777777 
+  12      77777777 
+  12      88888888 
+  13              	        dwordArray.TYPE      = 4
+  14              	        dwordArray.SIZEOF    = (. - dwordArray)
+  15              	        dwordArray.LENGTHOF  = (dwordArray.SIZEOF / dwordArray.TYPE)
+  16              	
+  17              	.section .bss
+  18              	.section .text
+  19              	.global _start
+  20              	    _start:
+  21              	
+  22 0000 01020058 	        ldr     x1,     =byteArray        
+  23 0004 200040B9 	        ldr     w0,     [x1]
+  24 0008 21040091 	        add     x1,     x1,     byteArray.TYPE
+  25 000c 20004039 	        ldrb    w0,     [x1]
+  26              	
+  27 0010 C1010058 	        ldr     x1,     =wordArray        
+  28 0014 200040B9 	        ldr     w0,     [x1]
+  29 0018 21080091 	        add     x1,     x1,     wordArray.TYPE
+  30 001c 20004039 	        ldrb    w0,     [x1]
+  31              	
+  32 0020 81010058 	        ldr     x1,     =dwordArray        
+  33 0024 200040B9 	        ldr     w0,     [x1]
+  34 0028 21100091 	        add     x1,     x1,     dwordArray.TYPE
+  35 002c 20004039 	        ldrb    w0,     [x1]
+  36              	
+  37 0030 000080D2 	        mov x0, #0 			//Move the return value of 0 into x0
+  38 0034 A80B8052 	        mov w8, #93 		//Move 93, end program, into w8
+  39 0038 010000D4 	        svc #0				//Poke the kernel
+  40 003c 00000000 	
+  40      00000000 
+  40      00000000 
+  40      00000000 
+  40      00000000 
+AARCH64 GAS  main.asm 			page 2
+
+
+DEFINED SYMBOLS
+            main.asm:2      .data:0000000000000000 byteArray
+            main.asm:3      *ABS*:0000000000000001 byteArray.TYPE
+            main.asm:4      *ABS*:0000000000000005 byteArray.SIZEOF
+            main.asm:5      *ABS*:0000000000000005 byteArray.LENGTHOF
+            main.asm:7      .data:0000000000000005 wordArray
+            main.asm:8      *ABS*:0000000000000002 wordArray.TYPE
+            main.asm:9      *ABS*:000000000000000c wordArray.SIZEOF
+            main.asm:10     *ABS*:0000000000000006 wordArray.LENGTHOF
+            main.asm:12     .data:0000000000000011 dwordArray
+            main.asm:13     *ABS*:0000000000000004 dwordArray.TYPE
+            main.asm:14     *ABS*:0000000000000018 dwordArray.SIZEOF
+            main.asm:15     *ABS*:0000000000000006 dwordArray.LENGTHOF
+            main.asm:20     .text:0000000000000000 _start
+            main.asm:22     .text:0000000000000000 $x
+            main.asm:40     .text:0000000000000040 $d
+
+NO UNDEFINED SYMBOLS
