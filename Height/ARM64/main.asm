@@ -24,17 +24,17 @@
         // x5 will hold the number of people
         mov     x5,     people.QUANTITY
 
-        ; load the address of first element of people into x1
+        // load the address of first element of people into x1
         ldr     x1,     =people
     
-        ; add   16 to the address to point to third element
+        // add   16 to the address to point to third element
         add     x1,     x1,     HEIGHT
     
     theloop:
         cmp     x5,     0
         beq     finish
 
-        ; put dereferenced value into x2    
+        // put dereferenced value into x2    
         ldr     x2,     [x1]
         
         cmp     x0,     x2
