@@ -8,8 +8,6 @@ section .text
 global _start  
     _start:
        
-        mov     rax,    0   
-        mov     rsi,    0
         mov     rsi,    heights ; move the address of the first element to rsi 
         ; mov     rdi,    [rsi] ; if I want to find the smallest height
         xor     rdi,    rdi     ; if I want to find the biggest height  
