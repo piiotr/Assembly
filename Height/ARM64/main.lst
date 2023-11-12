@@ -22,7 +22,7 @@ AARCH64 GAS  main.asm 			page 1
    9      50000000 
    9      00000000 
    9      BE000000 
-  10              	        people.TYPE        =   1
+  10              	        people.TYPE        =   8
   11              	        people.SIZEOF      =   (. - people)
   12              	        people.LENGTHOF    =   (people.SIZEOF / people.TYPE)
   13              	        people.QUANTITY    =   (people.SIZEOF / PERSON_SIZE)
@@ -35,49 +35,54 @@ AARCH64 GAS  main.asm 			page 1
   20              	    _start:
   21              	        // x0 will hold the tallest value 
   22 0000 000080D2 	        mov     x0,     #0
-  23              	        // x5 will hold the number of people
-  24 0004 650080D2 	        mov     x5,     people.QUANTITY
-  25              	        
-  26 0008 01020058 	        ldr     x1,     =people
-  27 000c 21400091 	        add     x1,     x1,     HEIGHT
-  28              	    
-  29              	    theloop:
-  30 0010 BF0000F1 	        cmp     x5,     0
-  31 0014 60010054 	        beq     finish
-  32              	        
-  33 0018 220040F9 	        ldr     x2,     [x1]
-  34              	        
-  35 001c 1F0002EB 	        cmp     x0,     x2
-  36 0020 8B000054 	        blt     action        
-  37              	        
-  38 0024 A50400D1 	        sub     x5,     x5,     #1
-  39 0028 21600091 	        add     x1,     x1,     PERSON_SIZE
-  40 002c F9FFFF17 	        b       theloop
-  41              	
-  42              	
-  43              	    action: 
-  44 0030 E00302AA 	        mov     x0,     x2
-  45 0034 A50400D1 	        sub     x5,     x5,     #1
+  23              	
+  24              	        // x5 will hold the number of people
+  25 0004 650080D2 	        mov     x5,     people.QUANTITY
+  26              	
+  27              	        // load the address of first element of people into x1
+  28 0008 01020058 	        ldr     x1,     =people
+  29              	    
+  30              	        // add   16 to the address to point to third element
+  31 000c 21400091 	        add     x1,     x1,     HEIGHT
+  32              	    
+  33              	    theloop:
+  34 0010 BF0000F1 	        cmp     x5,     #0
+  35 0014 60010054 	        beq     finish
+  36              	
+  37              	        // put dereferenced value into x2    
+  38 0018 220040F9 	        ldr     x2,     [x1]
+  39              	        
+  40 001c 1F0002EB 	        cmp     x0,     x2
+  41 0020 8B000054 	        blt     action        
+  42              	        
+  43 0024 A50400D1 	        sub     x5,     x5,     #1
+  44 0028 21600091 	        add     x1,     x1,     PERSON_SIZE
+  45 002c F9FFFF17 	        b       theloop
 AARCH64 GAS  main.asm 			page 2
 
 
-  46 0038 21600091 	        add     x1,     x1,     PERSON_SIZE
-  47 003c F5FFFF17 	        b       theloop
-  48              	
-  49              	    
-  50              	
-  51              	
-  52              	
+  46              	
+  47              	
+  48              	    action: 
+  49 0030 E00302AA 	        mov     x0,     x2
+  50 0034 A50400D1 	        sub     x5,     x5,     #1
+  51 0038 21600091 	        add     x1,     x1,     PERSON_SIZE
+  52 003c F5FFFF17 	        b       theloop
   53              	
-  54              	
+  54              	    
   55              	
   56              	
   57              	
-  58              	    finish:
-  59 0040 A80B8052 	        mov     w8,     #93
-  60 0044 010000D4 	        svc     #0 
-  60      00000000 
-  60      00000000 
+  58              	
+  59              	
+  60              	
+  61              	
+  62              	
+  63              	    finish:
+  64 0040 A80B8052 	        mov     w8,     #93
+  65 0044 010000D4 	        svc     #0 
+  65      00000000 
+  65      00000000 
 AARCH64 GAS  main.asm 			page 3
 
 
@@ -87,15 +92,15 @@ DEFINED SYMBOLS
             main.asm:4      *ABS*:0000000000000010 HEIGHT
             main.asm:5      *ABS*:0000000000000018 PERSON_SIZE
             main.asm:7      .data:0000000000000000 people
-            main.asm:10     *ABS*:0000000000000001 people.TYPE
+            main.asm:10     *ABS*:0000000000000008 people.TYPE
             main.asm:11     *ABS*:0000000000000048 people.SIZEOF
-            main.asm:12     *ABS*:0000000000000048 people.LENGTHOF
+            main.asm:12     *ABS*:0000000000000009 people.LENGTHOF
             main.asm:13     *ABS*:0000000000000003 people.QUANTITY
             main.asm:20     .text:0000000000000000 _start
             main.asm:22     .text:0000000000000000 $x
-            main.asm:29     .text:0000000000000010 theloop
-            main.asm:58     .text:0000000000000040 finish
-            main.asm:43     .text:0000000000000030 action
-            main.asm:60     .text:0000000000000048 $d
+            main.asm:33     .text:0000000000000010 theloop
+            main.asm:63     .text:0000000000000040 finish
+            main.asm:48     .text:0000000000000030 action
+            main.asm:65     .text:0000000000000048 $d
 
 NO UNDEFINED SYMBOLS

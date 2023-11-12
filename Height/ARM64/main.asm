@@ -7,7 +7,7 @@
     people:     .quad      17, 70, 174
                 .quad      25, 65, 180
                 .quad      36, 80, 190
-        people.TYPE        =   1
+        people.TYPE        =   8
         people.SIZEOF      =   (. - people)
         people.LENGTHOF    =   (people.SIZEOF / people.TYPE)
         people.QUANTITY    =   (people.SIZEOF / PERSON_SIZE)
@@ -31,7 +31,7 @@
         add     x1,     x1,     HEIGHT
     
     theloop:
-        cmp     x5,     0
+        cmp     x5,     #0
         beq     finish
 
         // put dereferenced value into x2    

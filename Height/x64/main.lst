@@ -1,7 +1,7 @@
      1                                  
-     2                                  AGE     equ     0
-     3                                  WEIGHT  equ     8
-     4                                  HEIGHT  equ     16
+     2                                  AGE             equ     0
+     3                                  WEIGHT          equ     8
+     4                                  HEIGHT          equ     16
      5                                  PERSON_SIZE     equ     24 ; the size of bytes in terms of one person
      6                                  
      7                                  section .data

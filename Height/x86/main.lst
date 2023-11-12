@@ -1,0 +1,45 @@
+     1                                  bits 32
+     2                                  
+     3                                  AGE			equ		0
+     4                                  WEIGHT		equ		4
+     5                                  HEIGHT		equ		8
+     6                                  PERSON_SIZE	equ		12
+     7                                  
+     8                                  section .data
+     9 00000000 1100000046000000D2-         people          dd      17, 70, 210 ; first person  
+     9 00000009 000000             
+    10 0000000C 2F0000003B000000BC-                         dd      47, 59, 188 ; second person
+    10 00000015 000000             
+    11 00000018 2400000040000000C7-                         dd      36, 64, 199 ; third person
+    11 00000021 000000             
+    12                                          .TYPE       equ     4
+    13                                          .SIZEOF     equ 	($-people)
+    14                                          .LENGTHOF   equ 	(people.SIZEOF / people.TYPE)
+    15                                          .QUANTITY   equ 	(people.SIZEOF / PERSON_SIZE)
+    16                                  
+    17                                  
+    18                                  section .bss
+    19                                  section .text
+    20                                  global _start
+    21                                  	
+    22                                  	; ebx for the output 
+    23                                  	_start:
+    24 00000000 BE[00000000]            		mov		esi,	people
+    25 00000005 8B5E08                  		mov		ebx,	HEIGHT[esi]	
+    26 00000008 B903000000              		mov		ecx,	people.QUANTITY
+    27                                  
+    28                                  	theloop:
+    29 0000000D 83F900                  		cmp		ecx,	0
+    30 00000010 740E                    		je		finish
+    31                                  
+    32 00000012 8B4608                  		mov		eax,	HEIGHT[esi]
+    33 00000015 39C3                    		cmp		ebx,	eax
+    34                                  
+    35 00000017 0F47D8                  		cmova	ebx,	eax
+    36 0000001A 49                      		dec		ecx
+    37 0000001B 83C60C                  		add		esi,	PERSON_SIZE
+    38 0000001E EBED                    		jmp		theloop
+    39                                  
+    40                                  	finish:
+    41 00000020 B801000000              		mov eax,1      ; Exit system call value
+    42 00000025 CD80                    		int 80h        ; Call the kernel
