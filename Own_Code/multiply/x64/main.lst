@@ -1,0 +1,16 @@
+     1                                  section .data
+     2                                  section .bss
+     3                                  section .text
+     4                                  global	_start
+     5                                  	_start:
+     6 00000000 BF00000000              		mov	rdi,	0
+     7 00000005 B903000000              		mov	rcx,	3
+     8 0000000A B804000000              		mov	rax,	4
+     9                                  	theloop:
+    10 0000000F 4883F900                		cmp	rcx,	0
+    11 00000013 7405                    		je	finish
+    12 00000015 4801C7                  		add	rdi,	rax
+    13 00000018 E2F5                    		loop	theloop
+    14                                  	finish:	
+    15 0000001A B83C000000              		mov	rax,	60
+    16 0000001F 0F05                    		syscall

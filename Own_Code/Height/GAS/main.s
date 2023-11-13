@@ -19,14 +19,13 @@
         lea     people,     %rbx
         mov     $SIZE,      %rcx
         mov     HEIGHT(%rbx),   %rdi
-
     
     theloop:
         mov     HEIGHT(%rbx),   %rax
         cmp     %rax,   %rdi 
         cmova   %rax,   %rdi 
         add     $PERSON_SIZE,   %rbx     
-        loopq   theloop
+        loop   theloop
         jmp     finish 
 
     finish:

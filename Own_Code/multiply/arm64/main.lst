@@ -1,0 +1,30 @@
+AARCH64 GAS  main.asm 			page 1
+
+
+   1              	.section .data
+   2              	.section .bss
+   3              	.section .text
+   4              	.global  _start
+   5              		_start:
+   6 0000 000080D2 			mov	x0,	#0
+   7 0004 610080D2 			mov	x1,	#3
+   8 0008 820080D2 			mov	x2,	#4
+   9              		theloop:
+  10 000c 3F0000F1 			cmp	x1,	#0
+  11 0010 80000054 			beq	finish
+  12 0014 0000028B 			add	x0,	x0,	x2
+  13 0018 210400D1 			sub	x1,	x1,	#1
+  14 001c FCFFFF17 			b	theloop
+  15              		finish:
+  16 0020 A80B8052 			mov	w8,	#93
+  17 0024 010000D4 			svc	#0
+AARCH64 GAS  main.asm 			page 2
+
+
+DEFINED SYMBOLS
+            main.asm:5      .text:0000000000000000 _start
+            main.asm:6      .text:0000000000000000 $x
+            main.asm:9      .text:000000000000000c theloop
+            main.asm:15     .text:0000000000000020 finish
+
+NO UNDEFINED SYMBOLS

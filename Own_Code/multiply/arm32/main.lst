@@ -1,0 +1,35 @@
+ARM GAS  main.asm 			page 1
+
+
+   1              	.section .data
+   2              	.section .bss
+   3              	.section .text
+   4              	.global  _start 
+   5              	    _start:
+   6              	        // r0 will hold the sum 
+   7 0000 0000A0E3 	        mov     r0,     #0
+   8              	        // r1 will hold the first number 
+   9 0004 0310A0E3 	        mov     r1,     #3
+  10              	        // r2 will hold the second number 
+  11 0008 0420A0E3 	        mov     r2,     #4
+  12              	    theloop:
+  13 000c 000051E3 	        cmp     r1,     #0
+  14 0010 0200000A 	        beq      finish
+  15 0014 020080E0 	        add     r0,     r0,     r2
+  16 0018 011041E2 	        sub     r1,     r1,     #1
+  17 001c FAFFFFEA 	        b       theloop 
+  18              	    finish:
+  19 0020 0170A0E3 	        mov     r7,     #1
+  20 0024 000000EF 	        svc     #0
+  21              	
+  22              	
+ARM GAS  main.asm 			page 2
+
+
+DEFINED SYMBOLS
+            main.asm:5      .text:0000000000000000 _start
+            main.asm:7      .text:0000000000000000 $a
+            main.asm:12     .text:000000000000000c theloop
+            main.asm:18     .text:0000000000000020 finish
+
+NO UNDEFINED SYMBOLS

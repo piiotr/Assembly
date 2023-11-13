@@ -1,0 +1,14 @@
+     1                                  section .data
+     2                                  section .bss
+     3                                  section .text
+     4                                  global	_start
+     5                                  	_start:
+     6 00000000 BB00000000              		mov	ebx,	0
+     7 00000005 B903000000              		mov	ecx,	3
+     8 0000000A B804000000              		mov	eax,	4
+     9                                  	theloop:
+    10 0000000F 01C3                    		add	ebx,	eax
+    11 00000011 E2FC                    		loop	theloop
+    12                                  	finish:
+    13 00000013 B801000000              		mov	eax,	1
+    14 00000018 CD80                    		int	80h
