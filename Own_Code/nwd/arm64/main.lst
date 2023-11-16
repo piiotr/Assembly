@@ -1,0 +1,56 @@
+AARCH64 GAS  main.asm 			page 1
+
+
+   1              	.section .data
+   2              	.section .bss 
+   3              	.section .text
+   4              	.global  _start
+   5              		_start:
+   6              			// use x0 for the output 
+   7 0000 000080D2 			mov	x0,	#0		
+   8              			// use x1 for the first number 
+   9 0004 411380D2 			mov	x1,	#154
+  10              			// use x2 for the first number 
+  11 0008 420880D2 			mov	x2,	#66
+  12              			// use x3 for the result of the division
+  13 000c 030080D2 			mov	x3,	#0
+  14              			// use x4 for the reminder 
+  15 0010 040080D2 			mov	x4,	#0 
+  16              		
+  17              		divide:
+  18 0014 210002CB 			sub	x1,	x1,	x2
+  19 0018 63040091 			add	x3,	x3,	#1
+  20 001c 3F0002EB 			cmp	x1,	x2
+  21 0020 49000054 			bls	getreminder
+  22 0024 FCFFFF17 			b	divide	
+  23              	
+  24              		getreminder:
+  25 0028 3F0000F1 			cmp	x1,	#0
+  26 002c 00010054 			beq	finish
+  27 0030 E40301AA 			mov	x4,	x1
+  28 0034 01000014 			b	change		
+  29              		
+  30              		change:
+  31 0038 E10302AA 			mov	x1,	x2
+  32 003c E20304AA 			mov	x2,	x4
+  33 0040 030080D2 			mov	x3,	#0
+  34 0044 040080D2 			mov	x4,	#0
+  35 0048 F3FFFF17 			b	divide
+  36              				
+  37              		finish:
+  38 004c E00302AA 			mov	x0,	x2
+  39 0050 A80B8052 			mov	w8,	#93
+  40 0054 010000D4 			svc	#0
+  41              	
+AARCH64 GAS  main.asm 			page 2
+
+
+DEFINED SYMBOLS
+            main.asm:5      .text:0000000000000000 _start
+            main.asm:7      .text:0000000000000000 $x
+            main.asm:17     .text:0000000000000014 divide
+            main.asm:24     .text:0000000000000028 getreminder
+            main.asm:37     .text:000000000000004c finish
+            main.asm:30     .text:0000000000000038 change
+
+NO UNDEFINED SYMBOLS

@@ -1,0 +1,34 @@
+AARCH64 GAS  main.asm 			page 1
+
+
+   1              	.section .data
+   2              	.section .bss
+   3              	.section .text
+   4              	.global 	_start
+   5              		_start:
+   6              			// x0 will hold the sum
+   7 ???? 200080D2 			mov	x0,	#1
+   8 ???? A10080D2 			mov	x1,	#5
+   9              		theloop:	
+  10 ???? 3F0000F1 			cmp	x1,	#0
+  11 ???? 60000054 			beq	finish
+  12              	
+  13              			mul	x0,	x0,	x1, 	x0
+  14 ???? 210400D1 			sub	x1,	x1,	#1		
+  15 ???? FDFFFF17 			b	theloop
+  16              	
+  17              	
+  18              	
+  19              		finish:
+  20 ???? A70B8052 			mov	w7,	#93
+  21 ???? 010000D4 			svc	#0
+AARCH64 GAS  main.asm 			page 2
+
+
+DEFINED SYMBOLS
+            main.asm:5      .text:0000000000000000 _start
+            main.asm:7      .text:0000000000000000 $x
+            main.asm:9      .text:0000000000000008 theloop
+            main.asm:19     .text:0000000000000018 finish
+
+NO UNDEFINED SYMBOLS
