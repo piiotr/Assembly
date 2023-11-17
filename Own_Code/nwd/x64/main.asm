@@ -1,5 +1,3 @@
-section .data 
-section .bss
 section .text
 global	_start
 	_start:
@@ -18,9 +16,6 @@ global	_start
 		mov	rcx,	rdx
 		xor	rdx,	rdx
 		jmp	theloop
-
-
-
 
 	finish:
 		mov	rax,	60

@@ -1,0 +1,30 @@
+     1                                  section .text
+     2                                  global _start 
+     3                                  	_start:
+     4                                  		; rdi will hold the sum of the digits 
+     5 00000000 4831FF                  		xor	rdi,	rdi
+     6                                  		; rax will hold the initial number 
+     7 00000003 B869000000              		mov	rax,	105
+     8                                  		; rcx will hold the 10 for the division
+     9 00000008 B90A000000              		mov	rcx,	10
+    10                                  		
+    11                                  
+    12                                  	theloop:
+    13 0000000D 4831D2                  		xor	rdx,	rdx
+    14                                  		
+    15 00000010 4883F809                		cmp	rax,	9
+    16 00000014 7608                    		jbe	adder
+    17                                  
+    18 00000016 48F7F1                  		div	rcx
+    19                                  
+    20 00000019 4801D7                  		add	rdi,	rdx
+    21 0000001C EBEF                    		jmp	theloop
+    22                                  
+    23                                  	
+    24                                  	adder:
+    25 0000001E 4801C7                  		add	rdi, rax
+    26 00000021 EB00                    		jmp	finish		
+    27                                  
+    28                                  	finish:
+    29 00000023 B83C000000              		mov	rax,	60
+    30 00000028 0F05                    		syscall

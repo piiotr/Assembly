@@ -1,0 +1,55 @@
+AARCH64 GAS  main.asm 			page 1
+
+
+   1              	.section .text
+   2              	.global _start
+   3              		_start:
+   4              			// use x0 for the output 
+   5 0000 000080D2 			mov	x0,	#0
+   6              			// use x1 for the initial number 
+   7 0004 A10F80D2 			mov	x1,	#125
+   8              			// use x2 for the division integer 
+   9 0008 020080D2 			mov	x2,	#0
+  10              	
+  11              		theloop:
+  12 000c 3F2400F1 			cmp	x1,	#9
+  13 0010 6D010054 			ble	adder
+  14              			
+  15 0014 01000014 			b	divide
+  16              		
+  17              		divide:
+  18 0018 3F2400F1 			cmp	x1,	#9
+  19 001c 8D000054 			ble	getremainder
+  20              	
+  21 0020 212800D1 			sub	x1,	x1,	#10
+  22 0024 42040091 			add	x2,	x2,	#1
+  23 0028 FCFFFF17 			b	divide			
+  24              			
+  25              		getremainder:
+  26 002c 0000018B 			add	x0,	x0,	x1
+  27 0030 E10302AA 			mov	x1,	x2
+  28 0034 020080D2 			mov	x2,	#0
+  29 0038 F5FFFF17 			b	theloop	
+  30              	
+  31              		
+  32              	
+  33              		adder:
+  34 003c 0000018B 			add	x0,	x0,	x1
+  35 0040 01000014 			b	finish
+  36              	
+  37              		finish:
+  38 0044 A80B8052 			mov	w8,	#93
+  39 0048 010000D4 			svc	#0
+AARCH64 GAS  main.asm 			page 2
+
+
+DEFINED SYMBOLS
+            main.asm:3      .text:0000000000000000 _start
+            main.asm:5      .text:0000000000000000 $x
+            main.asm:11     .text:000000000000000c theloop
+            main.asm:33     .text:000000000000003c adder
+            main.asm:17     .text:0000000000000018 divide
+            main.asm:25     .text:000000000000002c getremainder
+            main.asm:37     .text:0000000000000044 finish
+
+NO UNDEFINED SYMBOLS
