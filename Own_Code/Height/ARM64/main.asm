@@ -51,15 +51,6 @@
         add     x1,     x1,     PERSON_SIZE
         b       theloop
 
-    
-
-
-
-
-
-
-
-
     finish:
         mov     w8,     #93
         svc     #0 

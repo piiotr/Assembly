@@ -1,0 +1,44 @@
+     1                                  section .text 
+     2                                  global  _start
+     3                                  	_start: 
+     4                                  		; rdi will hold the final result 
+     5 00000000 4831FF                  		xor	rdi, 	rdi
+     6                                  		; rax will hold a 
+     7 00000003 B820000000              		mov	rax,	32
+     8                                  		; rcx will hold b 
+     9 00000008 B90C000000              		mov	rcx,	12
+    10                                  		; rbx will hold the nwd 
+    11 0000000D BB00000000              		mov	rbx,	0
+    12                                  		; clean the rdx for the reminder 
+    13 00000012 4831D2                  		xor	rdx,	rdx
+    14                                  		; r8 will hold the division integer 
+    15 00000015 41B800000000            		mov	r8,	0
+    16                                  		; r9 will hold the original a 
+    17 0000001B 4989C1                  		mov	r9,	rax
+    18                                  		; r10 will hold the original b 
+    19 0000001E 4989CA                  		mov	r10,	rcx 
+    20                                  
+    21                                  	nwd:
+    22 00000021 48F7F1                  		div	rcx
+    23 00000024 4883FA00                		cmp	rdx,	0
+    24 00000028 480F44D9                		cmove	rbx,	rcx
+    25 0000002C 740B                    		je 	nww
+    26                                  		
+    27 0000002E 4889C8                  		mov	rax,	rcx
+    28 00000031 4889D1                  		mov	rcx,	rdx
+    29 00000034 4831D2                  		xor	rdx,	rdx
+    30 00000037 EBE8                    		jmp	nwd
+    31                                  
+    32                                  		
+    33                                  	nww:
+    34 00000039 4C89C8                  		mov	rax,	r9
+    35 0000003C 4C89D1                  		mov	rcx,	r10
+    36 0000003F 48F7E1                  		mul	rcx
+    37 00000042 48F7F3                  		div	rbx
+    38 00000045 4889C7                  		mov	rdi,	rax	
+    39                                  	
+    40                                  
+    41                                  	finish:
+    42 00000048 B83C000000              		mov	rax,	60
+    43 0000004D 0F05                    		syscall
+    44                                  
